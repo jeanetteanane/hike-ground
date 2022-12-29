@@ -1,0 +1,46 @@
+<% layout('layouts/boilerplate')%>
+<div id="cluster-map"></div>
+<div class="container">
+  <h1>All Hikegrounds</h1>
+  <% for (let hikeground of hikegrounds){%>
+  <div class="card mb-3">
+    <div class="row">
+      <div class="col-md-4">
+        <% if(hikeground.images.length) {%>
+        <img
+          class="img-fluid"
+          alt=""
+          src="<%=hikeground.images[0].url%>"
+          crossorigin
+        />
+        <% } else {%>
+        <img
+          class="img-fluid"
+          alt=""
+          src="https://res.cloudinary.com/dzolpsb2q/image/upload/v1671035191/Hikeground/arikxo1uei9rgouilf65.jpg"
+          crossorigin
+        />
+        <% } %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= hikeground.title %></h5>
+          <p class="card-text"><%= hikeground.description %></p>
+          <p class="card-text">
+            <small class="text-muted"><%= hikeground.location%></small>
+          </p>
+          <a class="btn btn-primary" href="/hikegrounds/<%=hikeground._id%>"
+            >View <%=hikeground.title%></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }%>
+</div>
+<script>
+  const tokenMap = "<%-process.env.MAPBOX_TOKEN%>";
+  const hikegrounds = {features: <%-JSON.stringify(hikegrounds)%>};
+</script>
+
+<script src="/javascript/mapCluster.js"></script>

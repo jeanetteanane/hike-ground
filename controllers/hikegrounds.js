@@ -1,8 +1,8 @@
 const Hikeground = require('../models/hikeGround');
-const {cloudinary} = require('../cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mbtoken = process.env.MAPBOX_TOKEN;
 const geocode = mbxGeocoding({accessToken: mbtoken});
+const {cloudinary} = require('../cloudinary');
 
 
 module.exports.index = async (req, res) => {
@@ -20,7 +20,7 @@ module.exports.createHikeground = async (req, res, next) => {
         limit: 1
     }).send()
     const hikeground = new Hikeground(req.body.hikeground);
-    hikeground.geometry = geoInfo.body.features[0].geometry.coordinates;
+    hikeground.geometry = geoInfo.body.features[0].geometry;
     hikeground.images = req.files.map(i => ({ url: i.path, filename: i.filename}));
     hikeground.owner = req.user._id;
     await hikeground.save();
@@ -49,22 +49,22 @@ module.exports.editForm = async (req, res) => {
     res.render('hikegrounds/edit', {hikeground});
 };
 
-module.exports.updateHikeground = async(req, res) => {
-    const {id} = req.params;
+module.exports.updateHikeground = async (req, res) => {
+    const { id } = req.params;
     console.log(req.body);
-    const hikeground = await Hikeground.findByIdAndUpdate(id, {...req.body.hikeground});
-    const imgs = req.files.map(i => ({url: i.path, filename: i.filename})); 
+    const hikeground = await Hikeground.findByIdAndUpdate(id, { ...req.body.hikeground });
+    const imgs = req.files.map(i => ({ url: i.path, filename: i.filename }));
     hikeground.images.push(...imgs);
     await hikeground.save();
-    if (req.body.deleteImages){
-        for(let filename of req.body.deleteImages) {
-            await cloudinary.uploader.destroy(filename)
+    if (req.body.deleteImages) {
+        for (let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename);
         }
-        await hikeground.updateOne({$pull: {images: {filename: {$in: req.body.deleteImages}}}})
+        await hikeground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
     }
-    req.flash('success', 'The Hikeground has been updated!');
+    req.flash('success', 'Successfully updated campground!');
     res.redirect(`/hikegrounds/${hikeground._id}`)
-};
+}
 
 module.exports.deleteHikeground = async(req, res) => {
     const {id} = req.params;

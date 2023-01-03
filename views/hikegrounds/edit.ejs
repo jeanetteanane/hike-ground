@@ -66,26 +66,25 @@
         >
         <div class="valid-feedback">Looks good!</div>
       </div>
-      <div class="mb-3">
-        <div class="form-file custom-file">
-          <input
-            type="file"
-            class="form-file-input"
-            id="image"
-            name="image"
-            multiple
-          />
-          <label class="form-file-label" for="image">
-            <span class="form-file-text custom-file-label"
-              >Add more image(s)...</span
-            >
-            <span class="form-file-button">Browse</span>
-          </label>
-        </div>
+      <div class="mt-3 custom-file">
+        <label for="image" class="form-label">Choose Images</label>
+        <input
+          class="form-control"
+          type="file"
+          id="image"
+          name="image"
+          multiple
+        />
+        <label for="image" class="custom-file-label text-muted"></label>
       </div>
       <div class="mb-3">
-        <%hikeground.images.forEach(function(img, i) {%>
-        <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="" />
+        <% hikeground.images.forEach(function(img, i) { %>
+        <img
+          src="<%=img.thumbnail%>"
+          class="img-thumbnail"
+          alt=""
+          crossorigin
+        />
         <div class="form-check-inline">
           <input
             type="checkbox"
@@ -94,13 +93,13 @@
             value="<%=img.filename%>"
           />
         </div>
-        <label for="image-<%=i%>">Delete Image?</label>
+        <label for="image-<%=i%>">Delete?</label>
         <% })%>
       </div>
       <div class="mb-3">
         <button class="btn btn-info">Update Hikeground</button>
       </div>
     </form>
-    <a href="/hikegrounds/<%= hikeground._id%>">Back To Hikeground</a>
+    <a href="/hikegrounds/<%=hikeground._id%>">Back To Hikeground</a>
   </div>
 </div>

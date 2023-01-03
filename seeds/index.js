@@ -24,7 +24,7 @@ const placeCombo = array => array[Math.floor(Math.random() * array.length)];
 const hikeDB = async () => {
   await Hikeground.deleteMany({});
   for (let i = 0; i < 50; i++) {
-    const random65 = Math.floor(Math.random() * 65);
+    const random65 = Math.floor(Math.random() * 20);
     const price = Math.floor(Math.random() * 20) + 10;
     const hike = new Hikeground({
       //YOUR USER ID
@@ -50,16 +50,8 @@ const hikeDB = async () => {
           filename: 'Hikeground/vojlzvhszbxrsyfu9gbl'
         },
         {
-          url: 'https://res.cloudinary.com/dzolpsb2q/image/upload/v1672453258/Hikeground/udc3iwmjseykicm8yc5j.avif',
-          filename: 'Hikeground/udc3iwmjseykicm8yc5j'
-        },
-        {
           url: 'https://res.cloudinary.com/dzolpsb2q/image/upload/v1672453258/Hikeground/j1y8id0iuhhlxc5woeio.avif',
           filename: 'Hikeground/j1y8id0iuhhlxc5woeio'
-        },
-        {
-          url: 'https://res.cloudinary.com/dzolpsb2q/image/upload/v1672453258/Hikeground/sawsu9cazdkslkiqm2wj.avif',
-          filename: 'Hikeground/sawsu9cazdkslkiqm2wj'
         }
       ]
     })

@@ -1,16 +1,16 @@
 <% layout('layouts/boilerplate')%>
 <div id="cluster-map"></div>
-<div class="container">
+<div class="container image">
   <h1>All Hikegrounds</h1>
   <% for (let hikeground of hikegrounds){%>
-  <div class="card mb-3">
+  <div class="card mb-3 change"  >
     <div class="row">
       <div class="col-md-4">
-        <% if(hikeground.images.length) { const randomImg = Math.floor(Math.random() * hikeground.images.length)%> 
+        <% if(hikeground.images.length) { %> 
         <img
           class="img-fluid"
           alt=""
-          src="<%=hikeground.images[`${randomImg}`].url%>"
+          src="<%=hikeground.images[0].url%>"
           crossorigin
         />
         <% } else {%>

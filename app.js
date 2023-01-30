@@ -21,7 +21,7 @@ const reviewsPath = require('./routes/reviews');
 
 const MongoStore = require('connect-mongo');
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/hike-ground'
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/hike-ground';
 
 mongoose.set('strictQuery', false);
 

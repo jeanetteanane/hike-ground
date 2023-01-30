@@ -8,3 +8,21 @@
     height: 300px;
 }
 
+body {
+    font-family: 'Karla', sans-serif;
+    font-weight: 400;
+}
+
+h1 {
+    padding: 10px;
+    font-weight: 600;
+}
+
+h5{
+    font-weight: bold;
+}
+
+.change {
+    cursor: pointer;
+}
+

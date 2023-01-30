@@ -3,15 +3,10 @@ const cities = require('./cities');
 const { places, descriptors } = require('./place')
 const Hikeground = require('../models/hikeGround');
 
-if (process.env.NODE_ENV !== "production") {
-  require('dotenv').config();
-}
-
 mongoose.set('strictQuery', false);
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/hike-ground'
 
-mongoose.connect(dbUrl);
+mongoose.connect('mongodb://localhost:27017/hike-ground')
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
